@@ -1,0 +1,48 @@
+{
+  "name": "Agreed",
+  "description": "Slack 'Agree' hotkey. Agree with every reaction on page.",
+  "version": "0.1",
+  "manifest_version": 2,
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Agreed!",
+    "default_icon": "images/icon128.png"
+  },
+  "commands": {
+    "agree-first-reaction": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y"
+      },
+      "description": "Agree with first reaction"
+    },
+    "agree-every-reaction": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "Command+Shift+X"
+      },
+      "description": "Agree with every reaction"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+U",
+        "chromeos": "Ctrl+Shift+U",
+        "linux": "Ctrl+Shift+J"
+      }
+    }
+  },
+  "permissions": [
+        "storage",
+        "tabs",
+        "https://*.slack.com/*"
+    ]
+}
