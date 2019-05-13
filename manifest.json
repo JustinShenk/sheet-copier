@@ -1,7 +1,7 @@
 {
   "name": "Agreed",
   "description": "Slack 'Agree' hotkey. Agree with every reaction on page.",
-  "version": "0.1",
+  "version": "0.2",
   "manifest_version": 2,
   "background": {
     "scripts": ["background.js"],

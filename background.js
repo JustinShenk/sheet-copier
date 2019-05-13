@@ -28,7 +28,7 @@ chrome.commands.onCommand.addListener(function(command) {
     chrome.tabs.executeScript({
       code: `
       function clickEveryReaction() {
-        const query = "div > button.c-button-unstyled.c-reaction:not(.c-reaction--reacted) > span.emoji-outer.emoji-sizer";
+        const query = "div > button.c-reaction:not(.c-reaction--reacted)";
         const reactionsToClick = document.querySelectorAll(query);
         const beforeCount = reactionsToClick.length;
 
