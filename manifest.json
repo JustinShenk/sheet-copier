@@ -1,8 +1,12 @@
 {
   "name": "Agreed",
   "description": "Slack 'Agree' hotkey. Agree with every reaction on page.",
-  "version": "0.3",
+  "version": "0.4",
   "manifest_version": 2,
+  "options_ui": {
+        "page": "options.html",
+        "chrome_style": true
+    },
   "background": {
     "scripts": ["background.js"],
     "persistent": true
