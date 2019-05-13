@@ -5,9 +5,9 @@ Slack "Agree" shortcut. Press `Ctrl/Cmd+Shift+Y` to agree with first reaction to
 Before -> After
 ---------------
 
-![before](before)
+![before](before.png)
 
-![after](after)
+![after](after.png)
 
 
 Hotkeys
