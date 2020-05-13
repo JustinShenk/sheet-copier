@@ -10,14 +10,14 @@ chrome.runtime.onInstalled.addListener(d => {
 							// it needs an update!
 							const settings = JSON.parse(res.settings);
 							pluginSettings = {
-                    agree_all: {
+                    duplicate_sheet: {
 											enabled: true,
                     },
 									};
 							} else {
 								// it"s a fresh install, load the defaults
 								pluginSettings = {
-									agree_all: {
+									duplicate_sheet: {
                         enabled: true
                     },
 									};
@@ -30,9 +30,9 @@ chrome.runtime.onInstalled.addListener(d => {
 	          const pluginSettings = JSON.parse(res.pluginSettings);
 
 	          // new plugins
-	          if (pluginSettings.agree_all === undefined) {
+	          if (pluginSettings.duplicate_sheet === undefined) {
 	              pluginUpdated = true;
-	              pluginSettings.agree_all = { enabled: true };
+	              pluginSettings.duplicate_sheet = { enabled: true };
 	          }
 
 	          if (pluginUpdated) {
@@ -49,51 +49,80 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         chrome.pageAction.show(sender.tab.id);
     } else if (request.type === "closeThisTab") {
         chrome.tabs.remove(sender.tab.id);
-    // } else if (request.type.startsWith("Agreed")) {
-    //     const parts = request.type.split(".");
-    //     const potentialClass = availablePlugins[parts[1]];
-		//
-    //     if (potentialClass) {
-    //         request.type = parts[2];
-    //         potentialClass.ProcessExtensionMessage(request, parts[1], sender);
-    //     }
-    }
+    };
 });
 
 
+ /**
+   * When a user clicks the button, this method is called: it reads the current
+   * state of `timeframe_` in order to pull a timeframe, then calls the clearing
+   * method with appropriate arguments.
+   *
+   * @private
+   */
+  function getURL(){
+    chrome.tabs.query({
+        active: true,
+        lastFocusedWindow: true
+    }, function(tabs) {
+        // and use that tab to fill in out title and url
+        var tab = tabs[0];
+        const url = tab.url;
+        // TODO: check if is a sheet        
+        if (url.includes("/d/")) {
+            const id = url.split("/d/")[1].split("/")[0];        
+            targetURL = `https://docs.google.com/spreadsheets/d/${id}/preview`;
+            console.log(targetURL);
+            $("#duplicateSheetURL").html(`<a href="${targetURL}">Click Me</a>`);
+            chrome.browserAction.onClicked.addListener(function(activeTab){
+              chrome.tabs.create({ url: targetURL });
+            });
+        } else {
+            alert(`URL is not a google sheet: ${url}`);
+        }        
+    });
+  };
+
 chrome.commands.onCommand.addListener(function(command) {
-  if (command === "agree-first-reaction") {
+  console.log('Command:', command);
+
+  if (command === "duplicate-sheet") {
     chrome.tabs.executeScript({
       code: `
-      function clickFirstReaction() {
-          const query = "div.c-reaction_bar > button:nth-child(1):not(.c-reaction--reacted)";
-          const reactionsToClick = document.querySelectorAll(query);
-          const beforeCount = reactionsToClick.length;
+      function duplicateSheet() {
+        var tab = tabs[0];
+        const url = tab.url;
+        console.log('Url', url);
 
-          if (reactionsToClick.length) {
-              reactionsToClick.forEach((button) => { button.click()} );
-          }
-
-          const afterCount = document.querySelectorAll(query).length;
-      }
-      clickFirstReaction()`
-    })
-  }
-  else if (command === "agree-every-reaction") {
-    chrome.tabs.executeScript({
-      code: `
-      function clickEveryReaction() {
-        const query = "div > button.c-reaction:not(.c-reaction--reacted)";
-        const reactionsToClick = document.querySelectorAll(query);
-        const beforeCount = reactionsToClick.length;
-
-        if (reactionsToClick.length) {
-            reactionsToClick.forEach((button) => { button.click()} );
-        }
-
-        const afterCount = document.querySelectorAll(query).length;
-      }
-      clickEveryReaction()`
-    })
+        // check if is a sheet
+        const isSheet = url.includes("sheets.google.com");
+        if (!isSheet) {
+            error = "URL is not a google sheet: " + url;
+            console.log(error);
+            alert(error);            
+            return;
+        };
+        if (!url.includes("/d/")) {
+          error = "URL is not a google sheet: " + url;
+          console.log(error);
+          alert(error);          
+          return;
+        };
+        
+        var sheetId = url.split("/d/")[1];
+        if (sheetId === undefined) {
+          alert("URL split failed on " + url);
+          return;
+        };
+        sheetId = sheetId.split("/edit")[0];
+        
+        targetURL = "https://docs.google.com/spreadsheets/d/" + sheetId + "/preview";
+        console.log(targetURL);        
+        chrome.browserAction.onClicked.addListener(function(activeTab){
+          chrome.tabs.create({ url: targetURL }); 
+        });
+      };
+      `
+    });
   }
 });

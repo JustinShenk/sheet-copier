@@ -1,7 +1,7 @@
 {
-  "name": "Agreed",
-  "description": "Slack 'Agree' hotkey. Agree with every reaction on page.",
-  "version": "0.4",
+  "name": "Sheet Duplicator",
+  "description": "Download/edit a view-only Google Sheet to make it editable.",
+  "version": "0.1",
   "manifest_version": 2,
   "options_ui": {
         "page": "options.html",
@@ -17,29 +17,28 @@
     "128": "images/icon128.png"
   },
   "browser_action": {
-    "default_title": "Ctrl/Cmd+Shift+Y for first, Ctrl/Cmd+Shift+X for all",
+    "default_title": "Ctrl+Shift+D for current tab",
     "default_icon": "images/icon128.png",
     "default_popup": "popup.html"
   },
   "commands": {
-    "agree-first-reaction": {
+    "duplicate-sheet": {
       "suggested_key": {
-        "default": "Ctrl+Shift+Y",
-        "mac": "Command+Shift+Y"
+        "default": "Shift+Alt+D",
+        "mac": "Shift+Alt+D"
       },
-      "description": "Agree with first reaction"
-    },
-    "agree-every-reaction": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+X",
-        "mac": "Command+Shift+X"
-      },
-      "description": "Agree with every reaction"
+      "description": "Duplicate sheet"
     }
   },
   "permissions": [
         "storage",
+        "activeTab",
         "tabs",
-        "https://*.slack.com/*"
-    ]
+        "notifications",
+        "webRequest",
+        "*://*.google.com/",
+        "http://*/",
+        "https://*/"
+    ],
+    "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
 }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html class="loading">
+
+<head>
+    <title>Sheet Duplicator - Edit view-only Google Sheets</title>
+    <meta charset="utf-8"/>
+    <link href="options.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <form id="the-form" class="container" method="POST" action="">
+        <table>
+            <tbody class="hide-popup">
+                <tr>
+                    <td colspan="2" class="tacenter"><img src="images/icon128.png" /></th>
+                </tr>
+            </tbody>
+            <tbody class="hide-before-accepting">
+                <tr>
+                    <th><label for="duplicate_sheet.enabled">Sheet Duplicator</label></th>
+                    <td><input type="checkbox" name="duplicate_sheet.enabled" id="duplicate_sheet.enabled" value="1"/></td>
+                </tr>
+            </tbody>
+            <tbody class="hide-popup hide-before-accepting">
+                <tr>
+                    <td colspan="2" class="tacenter">
+                        <input type="submit" value="Save" />
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="hide-full-page hide-before-accepting">
+                <tr>
+                    <th>&nbsp;</th>
+                    <td>
+                        <input type="submit" value="Save" />
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="hide-full-page hide-before-accepting">
+                <tr>
+                    <td colspan="2" class="taright fs08">&nbsp;<br/>Issues? comments? questions? visit <a href="https://refined.chat">refined.chat</a></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="taright fs08">Refined v<span id="version"></span></td>
+                </tr>
+            </tbody>
+            <tbody class="hide-after-accepting">
+                <tr>
+                    <td colspan="2" class="tacenter">This extension may break your Google Sheets experience.</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tacenter fwbold">This extension is not officially
+                        supported by Google. It may have unexpected effects, etc.</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tacenter">
+                        &nbsp;<br />
+                        <input type="button" value="I don't want to continue. Uninstall the extension." id="uninstall" />
+                        <br />&nbsp;<br />
+                        <input type="button" value="I understand the risks involved. Enable the extension." id="accept" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <script type="text/javascript" src="options.js"></script>
+</body>
+
+</html>
