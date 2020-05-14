@@ -60,10 +60,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         active: true,
         lastFocusedWindow: true
     }, function(tabs) {
-        // and use that tab to fill in out title and url
+        // and use that tab to fill out title and url
         var tab = tabs[0];
-        const url = tab.url;
-        // TODO: check if is a sheet        
+        const url = tab.url;        
         if (url.includes("/d/")) {
             const id = url.split("/d/")[1].split("/")[0];        
             targetURL = `https://docs.google.com/spreadsheets/d/${id}/preview`;
@@ -73,51 +72,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
               chrome.tabs.create({ url: targetURL });
             });
         } else {
-            alert(`URL is not a google sheet: ${url}`);
+            alert(`URL is not a Spreadsheet: ${url}`);
         }        
     });
   };
-
-chrome.commands.onCommand.addListener(function(command) {
-  console.log('Command:', command);
-
-  if (command === "open-copyable-sheet") {
-    chrome.tabs.executeScript({
-      code: `
-      function openCopyableSheet() {
-        var tab = tabs[0];
-        const url = tab.url;
-        console.log('Url', url);
-
-        // check if is a sheet
-        const isSheet = url.includes("sheets.google.com");
-        if (!isSheet) {
-            error = "URL is not a google sheet: " + url;
-            console.log(error);
-            alert(error);            
-            return;
-        };
-        if (!url.includes("/d/")) {
-          error = "URL is not a google sheet: " + url;
-          console.log(error);
-          alert(error);          
-          return;
-        };
-        
-        var sheetId = url.split("/d/")[1];
-        if (sheetId === undefined) {
-          alert("URL split failed on " + url);
-          return;
-        };
-        sheetId = sheetId.split("/edit")[0];
-        
-        targetURL = "https://docs.google.com/spreadsheets/d/" + sheetId + "/preview";
-        console.log(targetURL);        
-        chrome.browserAction.onClicked.addListener(function(activeTab){
-          chrome.tabs.create({ url: targetURL }); 
-        });
-      };
-      `
-    });
-  }
-});

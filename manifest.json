@@ -1,6 +1,6 @@
 {
-  "name": "Sheet Copier",
-  "description": "Make a view-only Google Sheet copyable.",
+  "name": "Enable Spreadsheet Copy",
+  "description": "Allow selecting, copying, pasting and right clicking in some restricted sheets.",
   "version": "0.1",
   "manifest_version": 2,
   "options_ui": {
@@ -17,23 +17,14 @@
     "128": "images/icon128.png"
   },
   "browser_action": {
-    "default_title": "Ctrl+Shift+D for current tab",
+    "default_title": "Enable copy",
     "default_icon": "images/icon128.png",
     "default_popup": "popup.html"
   },
-  "commands": {
-    "open-copyable-sheet": {
-      "suggested_key": {
-        "default": "Shift+Alt+D",
-        "mac": "Shift+Alt+D"
-      },
-      "description": "Open copyable sheet"
-    }
-  },
   "permissions": [
-        "storage",
         "tabs",
-        "*://sheets.google.com/"
+        "storage",
+        "<all_urls>"
     ],
     "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
 }

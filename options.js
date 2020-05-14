@@ -1,7 +1,7 @@
-const reloadTabs = (callback) => {    
+const reloadTabs = (callback) => {
         if (callback) {
             callback();
-        }
+        };
 };
 
 const form = document.getElementById("the-form");
