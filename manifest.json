@@ -32,7 +32,6 @@
   },
   "permissions": [
         "storage",
-        "activeTab",
         "tabs",
         "*://sheets.google.com/"
     ],

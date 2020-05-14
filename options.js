@@ -1,14 +1,7 @@
-const reloadSlackTabs = (callback) => {
+const reloadTabs = (callback) => {
     chrome.tabs.query({ url: "https://*.slack.com/*" }, tabs => {
         let tabsRemaining = tabs.length;
-        if (tabsRemaining) {
-            tabs.forEach(t => chrome.tabs.reload(t.id, null, () => {
-                tabsRemaining--;
-                if (tabsRemaining === 0 && callback) {
-                    callback();
-                }
-            }));
-        } else if (callback) {
+        if (callback) {
             callback();
         }
     });
@@ -34,19 +27,8 @@ form.addEventListener("submit", e => {
     });
 
     chrome.storage.sync.get(["acceptedRisks", "pluginSettings"], res => {
-        const currentSettings = JSON.parse(res.pluginSettings || "{}");
-
-        // const plugins = Object.keys([AgreeAll]);
-        // for (const pluginName of plugins) {
-        //     newSettings[pluginName] = availablePlugins[pluginName].GenerateSettingsFromForm(currentSettings[pluginName], newSettings[pluginName]);
-        // }
-
-        // const json = JSON.stringify(newSettings);
-
-        // chrome.storage.sync.set({
-        //     pluginSettings: json
-        // }, () => reloadSlackTabs(closePopup));
-        reloadSlackTabs(closePopup);
+        const currentSettings = JSON.parse(res.pluginSettings || "{}");        
+        reloadTabs(closePopup);
     });
 });
 

@@ -1,4 +1,4 @@
-import AgreeAll from "./plugins/agreeAll";
+import CopySheet from "./plugins/copySheet";
 export default {
-    agreeAll: AgreeAll,
+    copySheet: CopySheet,
 };
