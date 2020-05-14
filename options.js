@@ -1,10 +1,7 @@
-const reloadTabs = (callback) => {
-    chrome.tabs.query({ url: "https://*.slack.com/*" }, tabs => {
-        let tabsRemaining = tabs.length;
+const reloadTabs = (callback) => {    
         if (callback) {
             callback();
         }
-    });
 };
 
 const form = document.getElementById("the-form");
@@ -67,7 +64,7 @@ accept.addEventListener("click", e => {
         const htmlEl = document.querySelector("html");
         htmlEl.classList.remove("not-accepted");
         htmlEl.classList.add("accepted");
-        reloadSlackTabs();
+        reloadTabs();
     });
 });
 
