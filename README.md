@@ -13,4 +13,4 @@ How to a Open View-Only Sheet
 - Click button to make a copyable sheet
 - Select and copy all (Cmd+A, Cmd+C) or (Ctrl+A, Ctrl+C) and paste into a new Google Sheet
 
-![click](example.jpg)
+![click](example.png)
