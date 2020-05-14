@@ -1,6 +1,6 @@
 {
-  "name": "Sheet Duplicator",
-  "description": "Download/edit a view-only Google Sheet to make it editable.",
+  "name": "Sheet Copier",
+  "description": "Make a view-only Google Sheet copyable.",
   "version": "0.1",
   "manifest_version": 2,
   "options_ui": {
@@ -22,23 +22,19 @@
     "default_popup": "popup.html"
   },
   "commands": {
-    "duplicate-sheet": {
+    "open-copyable-sheet": {
       "suggested_key": {
         "default": "Shift+Alt+D",
         "mac": "Shift+Alt+D"
       },
-      "description": "Duplicate sheet"
+      "description": "Open copyable sheet"
     }
   },
   "permissions": [
         "storage",
         "activeTab",
         "tabs",
-        "notifications",
-        "webRequest",
-        "*://*.google.com/",
-        "http://*/",
-        "https://*/"
+        "*://sheets.google.com/"
     ],
     "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
 }

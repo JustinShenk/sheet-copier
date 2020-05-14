@@ -10,14 +10,14 @@ chrome.runtime.onInstalled.addListener(d => {
 							// it needs an update!
 							const settings = JSON.parse(res.settings);
 							pluginSettings = {
-                    duplicate_sheet: {
+                    open_copyable_sheet: {
 											enabled: true,
                     },
 									};
 							} else {
 								// it"s a fresh install, load the defaults
 								pluginSettings = {
-									duplicate_sheet: {
+									open_copyable_sheet: {
                         enabled: true
                     },
 									};
@@ -30,9 +30,9 @@ chrome.runtime.onInstalled.addListener(d => {
 	          const pluginSettings = JSON.parse(res.pluginSettings);
 
 	          // new plugins
-	          if (pluginSettings.duplicate_sheet === undefined) {
+	          if (pluginSettings.open_copyable_sheet === undefined) {
 	              pluginUpdated = true;
-	              pluginSettings.duplicate_sheet = { enabled: true };
+	              pluginSettings.open_copyable_sheet = { enabled: true };
 	          }
 
 	          if (pluginUpdated) {
@@ -73,7 +73,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             const id = url.split("/d/")[1].split("/")[0];        
             targetURL = `https://docs.google.com/spreadsheets/d/${id}/preview`;
             console.log(targetURL);
-            $("#duplicateSheetURL").html(`<a href="${targetURL}">Click Me</a>`);
+            $("#openEditableSheetURL").html(`<a href="${targetURL}">Click Me</a>`);
             chrome.browserAction.onClicked.addListener(function(activeTab){
               chrome.tabs.create({ url: targetURL });
             });
@@ -86,10 +86,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 chrome.commands.onCommand.addListener(function(command) {
   console.log('Command:', command);
 
-  if (command === "duplicate-sheet") {
+  if (command === "open-copyable-sheet") {
     chrome.tabs.executeScript({
       code: `
-      function duplicateSheet() {
+      function openCopyableSheet() {
         var tab = tabs[0];
         const url = tab.url;
         console.log('Url', url);

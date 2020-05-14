@@ -18,7 +18,7 @@
             const id = url.split("/d/")[1].split("/")[0];        
             targetURL = `https://docs.google.com/spreadsheets/d/${id}/preview`;
             console.log(targetURL);
-            $("#duplicateSheetURL").html(`<a href="${targetURL}">Click Me</a>`);
+            $("#openCopyableSheetURL").html(`<a href="${targetURL}">Click Me</a>`);
             // chrome.browserAction.onClicked.addListener(function(activeTab){
             chrome.tabs.create({ url: targetURL });
             // });
@@ -33,5 +33,5 @@
   document.addEventListener('DOMContentLoaded', function () {
     var el = document.getElementById('copySheet');
 
-    document.getElementById("duplicateSheetBtn").addEventListener("click", getURL);
+    document.getElementById("openCopyableSheetBtn").addEventListener("click", getURL);
   });
