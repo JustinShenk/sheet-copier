@@ -45,20 +45,15 @@ chrome.runtime.onInstalled.addListener(d => {
 });
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.type === "slackPageOpened") {
-        chrome.pageAction.show(sender.tab.id);
-    } else if (request.type === "closeThisTab") {
+    if (request.type === "closeThisTab") {
         chrome.tabs.remove(sender.tab.id);
     };
 });
 
 
  /**
-   * When a user clicks the button, this method is called: it reads the current
-   * state of `timeframe_` in order to pull a timeframe, then calls the clearing
-   * method with appropriate arguments.
+   * Get URL for copyable sheet.
    *
-   * @private
    */
   function getURL(){
     chrome.tabs.query({
