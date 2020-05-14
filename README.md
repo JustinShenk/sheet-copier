@@ -1,17 +1,12 @@
-# Agreed - Slack Agree Hotkey :thumbsup:
+# Sheet Copier 📋
 
-Slack "Agree" shortcut. Press `Ctrl/Cmd+Shift+Y` to agree with first reaction to every post, press `Ctrl/Cmd+Shift+X` to agree with every reaction.
+Make Google Sheet table copyable for downloading. Useful for downloading or sorting columns in Google Sheets marked View-only.
 
-Before -> After
----------------
+Open View-Only Sheet
+--------------------
 
-![before](before.png)
+![click](example.jpg)
 
-![after](after.png)
+Then copy all (Cmd+A or Ctrl+A), open new Google Sheet, and paste the content into the new spreadsheet.
 
-
-Hotkeys
--------
-
-* `Ctrl/Command + Shift + Y` - Agree with first
-* `Ctrl/Command + Shift + X` - Agree with all
+Now you can save the file.
