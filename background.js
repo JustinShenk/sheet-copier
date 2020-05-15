@@ -1,9 +1,5 @@
 chrome.runtime.onInstalled.addListener(d => {
-    chrome.storage.sync.get(["acceptedRisks", "settings", "pluginSettings"], res => {
-        if (!res.acceptedRisks) {
-            chrome.tabs.create({ url: chrome.extension.getURL("options.html") + "?fullpage=1" });
-        }
-
+    chrome.storage.sync.get(["acceptedRisks", "settings", "pluginSettings"], res => {        
 				if (!res.pluginSettings) {
 					let pluginSettings = {};
 					if (res.settings) {
